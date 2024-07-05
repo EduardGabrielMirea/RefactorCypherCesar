@@ -1,0 +1,36 @@
+ En este .txt voy a razonar y explicar que he refactorizado del código JAVA para llegar a lo que según el manual de "Clean Code" sería la forma perfecta.
+
+- Enunciado:
+
+ El Cifrado César es una de las técnicas de cifrado más simples y conocidas. Se trata de un tipo de cifrado de sustitución en el que cada letra del texto sin cifrar es reemplazada por otra letra
+ que se encuentra un número fijo de posiciones hacia abajo en el alfabeto. Por ejemplo, con un desplazamiento hacia la derecha de 3, la letra E sería reemplazada por H, la F se convertiría en I, y así sucesivamente.
+ Esta transformación se puede representar alineando dos alfabetos: el alfabeto cifrado es el alfabeto normal rotado hacia la derecha un cierto número de posiciones. A continuación tienes dos funciones que codifican y decodifican usando el cifrado César.
+ Tu tarea consiste en entender el código y refactorizarlo para que sea lo más limpio posible, según lo visto en la sesión de Clean Code.
+
+
+
+- Razonamiento:
+
+    En primer lugar vi que había un comentario en la clase Main. Es preferible evitar comentarios dentro de los archivos de codigo, a no ser que sean extrictamente necesarios para su
+entendimento en cual caso se colocarian al princio del archivo. Pienso que el enunciado se puede colocar en un archivo de texto o en un pdf exterior. Yo lo he colocado dentro de este
+archivo txt porque considero que forma parte de la guía igual que todos los cambios que voy a realizar.
+
+    En segundo lugar voy a separa o desacoplar el código en diversas clases para facilitar que se puedan ejecutar cambios en algún componente del codigo sin que afecte a otros o
+produzca errores tanto de herencia como otros.
+
+    En tercer lugar voy a refactorizar todos los accesos de las variables, los metodos, etc. Porque? La razón es que todos están de la siguiente forma (Ej: private static final int ALPHABET_LENGTH = 26;).
+Entonces lo que produce esto es que se genere un impedimento a la hora de usar estas variables, metodos u otros, debido a su visibilidad así que lo mas indicado es pasarlos a accesos públicos ( public static final int ALPHABET_LENGTH = 26;).
+
+    En cuarto lugar una vez he refactorizado el acceso a los metodos externos que he quitado de la clase Main y colocado en clases expecifcas para entender mejor su uso.
+Esto también genera que ahora cuando usas el metodo cipher, ya sabes sobre que lo estas usando porque hay mayor información en el argoritmo.
+
+    Ej: (Uso en la clase Main.)
+    Antes:
+        assert cipher("Hello World", 1).equals("Ifmmp!Xpsme") : cipher("Hello World", 1) + " === 'Ifmmp!Xpsme'";
+
+    Ahora:
+           assert TextToEncrypt.cipher("Hello World", 1).equals("Ifmmp!Xpsme") : TextToEncrypt.cipher("Hello World", 1) + " === 'Ifmmp!Xpsme'";
+           assert TextToUnCrypt.decipher(TextToEncypt.cipher("Hello World", 3), 3).equals("Hello World") : TextToUnCrypt.decipher(TextToEncypt.cipher("Hello World", 3), 3) + " === 'Hello World'";
+
+
+En quinto lugar, he pensado que el texto que se intodzuca sea interactivo con el usuario. Así el podrá introduzcir
