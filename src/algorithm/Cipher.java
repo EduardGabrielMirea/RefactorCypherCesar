@@ -1,27 +1,26 @@
 package algorithm;
-
-import services.AsciiCount;
-
-import java.util.Scanner;
+import static services.AsciiTest.*;
 
 public class Cipher {
 
-    public String cipher(String textToEncrypt) {
-        Scanner Scanner = new Scanner(System.in);
-        StringBuilder cipher = new StringBuilder();
 
-        int newCharToAddToCipher, shiftToApply, currentChar;
-
-        int IntroduceManyNumberJumps = Scanner.nextInt();
-        int NumberJumps = IntroduceManyNumberJumps % AsciiCount.ALPHABET_LENGTH;
+    public String cipher(String textToEncrypt,int shift) {
+        StringBuilder encryptedText = new StringBuilder();
 
         for (int i = 0; i < textToEncrypt.length(); i++) {
-            currentChar = textToEncrypt.charAt(i);
-            shiftToApply = AsciiCount.isOutOfAlphabet(currentChar, NumberJumps) ? NumberJumps - AsciiCount.ALPHABET_LENGTH : NumberJumps;
-            newCharToAddToCipher = currentChar + shiftToApply;
-            cipher.append((char) newCharToAddToCipher);
+            int currentChar = textToEncrypt.charAt(i);
+            int shiftNumberInRenge = shift % alphabetLength;
+
+            int shiftToApply;
+            if (isOutOfAlphabet(currentChar, shiftNumberInRenge)) {
+                shiftToApply = shiftNumberInRenge - alphabetLength;
+            } else {
+                shiftToApply = shiftNumberInRenge;
+            }
+            int newCipherCharAdd = currentChar + shiftToApply;
+            encryptedText.append((char) newCipherCharAdd);
         }
-        return cipher.toString();
+        return encryptedText.toString();
     }
 
 }

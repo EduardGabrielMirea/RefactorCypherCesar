@@ -15,16 +15,13 @@
 entendimento en cual caso se colocarian al princio del archivo. Pienso que el enunciado se puede colocar en un archivo de texto o en un pdf exterior. Yo lo he colocado dentro de este
 archivo txt porque considero que forma parte de la guía igual que todos los cambios que voy a realizar.
 
-    En segundo lugar voy a separa o desacoplar el código en diversas clases para facilitar que se puedan ejecutar cambios en algún componente del codigo sin que afecte a otros o
-produzca errores tanto de herencia como otros.
+    En segundo lugar voy a desacoplar el código en diversas clases para facilitar que se puedan ejecutar cambios en algún componente del codigo sin que afecte a otras partes.
+Para esto he creado primero tres carpetas, la primera para las clases que van a ejecutar el algoritmo en la cual he crado por separado la clase de encriptado y la de desencriptado.
+La segunda  carpeta es para los .txt donde va esta explicación y la tercera he colcoado un controlador para los metodos que uso para averiguar si el caracter es upper o lower y si esta dentro o fuera
+de rango del alphabeto.
 
-    En tercer lugar voy a refactorizar todos los accesos de las variables, los metodos, etc. Porque? La razón es que todos están de la siguiente forma (Ej: private static final int ALPHABET_LENGTH = 26;).
-Entonces lo que produce esto es que se genere un impedimento a la hora de usar estas variables, metodos u otros, debido a su visibilidad así que lo mas indicado es pasarlos a accesos públicos ( public static final int ALPHABET_LENGTH = 26;).
 
-    En cuarto lugar una vez he refactorizado el acceso a los metodos externos que he quitado de la clase Main y colocado en clases expecifcas para entender mejor su uso.
-Esto también genera que ahora cuando usas el metodo cipher, ya sabes sobre que lo estas usando porque hay mayor información en el argoritmo.
-
-    Ej: (Uso en la clase Main.)
+  Ej: (Uso en la clase Main.)
     Antes:
         assert cipher("Hello World", 1).equals("Ifmmp!Xpsme") : cipher("Hello World", 1) + " === 'Ifmmp!Xpsme'";
 
@@ -32,5 +29,9 @@ Esto también genera que ahora cuando usas el metodo cipher, ya sabes sobre que 
            assert TextToEncrypt.cipher("Hello World", 1).equals("Ifmmp!Xpsme") : TextToEncrypt.cipher("Hello World", 1) + " === 'Ifmmp!Xpsme'";
            assert TextToUnCrypt.decipher(TextToEncypt.cipher("Hello World", 3), 3).equals("Hello World") : TextToUnCrypt.decipher(TextToEncypt.cipher("Hello World", 3), 3) + " === 'Hello World'";
 
+La tercera clase que he creado, ha sido para separar los metodos que hacian más de una cosa y convertirlos en metodos que se centren en 1 sola cosa, por ejemplo:
+    Primero saber si es upper o lower, 2 metodos diferentes, para saber si estan fuera del rango en caso de la aplicación del desplazamiento 2 metodos diferentes.
 
-En quinto lugar, he pensado que el texto que se intodzuca sea interactivo con el usuario. Así el podrá introduzcir
+    En último lugar voy a refactorizar todos los accesos de las variables, los metodos, etc. Porque? La razón es que todos están de la siguiente forma (Ej: private static final int ALPHABET_LENGTH = 26;).
+Entonces lo que produce esto es que se genere un impedimento a la hora de usar estas variables, metodos u otros, debido a su visibilidad así que lo mas indicado es pasarlos a accesos públicos ( public static final int ALPHABET_LENGTH = 26;).
+

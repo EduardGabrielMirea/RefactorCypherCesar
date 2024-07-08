@@ -1,20 +1,28 @@
 package algorithm;
 
-public class Decipher {
-/*
-    public String decipher(String text, int shift) {
-        StringBuilder decipher = new StringBuilder();
-        int newCharToAddToDecipher, shiftToApply, currentChar;
-        shift = -shift % ALPHABET_LENGTH;
+import static services.AsciiTest.alphabetLength;
+import static services.AsciiTest.isOutOfAlphabet;
 
-        for (int i = 0; i < text.length(); i++) {
-            currentChar = text.charAt(i);
-            shiftToApply = isOutOfAlphabet(currentChar, shift) ? shift + ALPHABET_LENGTH : shift;
-            newCharToAddToDecipher = currentChar + shiftToApply;
-            decipher.append((char) newCharToAddToDecipher);
+public class Decipher {
+
+    public String decipher(String textToUncrypt, int shift) {
+        StringBuilder decipherText = new StringBuilder();
+
+        for (int i = 0; i < textToUncrypt.length(); i++) {
+            int currentChar = textToUncrypt.charAt(i);
+            int shiftNumberInRenge = -shift % alphabetLength;
+
+            int shiftToApply;
+            if (isOutOfAlphabet(currentChar, shiftNumberInRenge)) {
+                shiftToApply = shiftNumberInRenge + alphabetLength;
+            } else {
+                shiftToApply = shiftNumberInRenge;
+            }
+
+            int newCharToAddToDecipher = currentChar + shiftToApply;
+            decipherText.append((char) newCharToAddToDecipher);
         }
-        return decipher.toString();
+        return decipherText.toString();
     }
 
- */
 }
